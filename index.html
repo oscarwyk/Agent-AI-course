@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent AI 課程｜成大電機</title>
+<meta name="description" content="國立成功大學電機工程學系 Agent AI 課程簡介與教學影片">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --surface-2: #efede6;
+    --text: #1b1b1f;
+    --muted: #5d5d66;
+    --line: #dddad0;
+    --accent: #b8321f;        /* 成大紅調 */
+    --accent-soft: #f6e3de;
+    --radius: 14px;
+    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 6px 24px rgba(0,0,0,.06);
+    --maxw: 1120px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121214; --surface: #1b1b1f; --surface-2: #24242a;
+      --text: #ecebe6; --muted: #a3a2aa; --line: #2f2f36;
+      --accent: #ff6b52; --accent-soft: #3a1f1a;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121214; --surface: #1b1b1f; --surface-2: #24242a;
+    --text: #ecebe6; --muted: #a3a2aa; --line: #2f2f36;
+    --accent: #ff6b52; --accent-soft: #3a1f1a;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 24px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: "Noto Sans TC", system-ui, -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height: 1.75; -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 16px; }
+  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+  /* ---------- Nav ---------- */
+  header.nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
+  }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 12px; }
+  .brand { font-weight: 900; letter-spacing: .02em; text-decoration: none; color: var(--text); white-space: nowrap; }
+  .brand span { color: var(--accent); }
+  .nav nav { display: flex; gap: 4px; align-items: center; }
+  .nav nav a {
+    color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500;
+    padding: 6px 10px; border-radius: 8px;
+  }
+  .nav nav a:hover { color: var(--text); background: var(--surface-2); }
+  .theme-btn {
+    border: 1px solid var(--line); background: var(--surface); color: var(--text);
+    width: 34px; height: 34px; border-radius: 8px; cursor: pointer; font-size: 15px;
+  }
+  @media (max-width: 640px) { .nav nav a.hide-sm { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 72px 0 56px; border-bottom: 1px solid var(--line); }
+  .eyebrow {
+    display: inline-block; font-size: 13px; font-weight: 700; color: var(--accent);
+    background: var(--accent-soft); padding: 4px 10px; border-radius: 999px; margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(34px, 6vw, 60px); line-height: 1.15; margin: 0 0 18px; font-weight: 900; letter-spacing: -.01em;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p.lead { font-size: clamp(16px, 2vw, 19px); color: var(--muted); max-width: 680px; margin: 0 0 28px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 10px 28px; font-size: 14px; color: var(--muted); }
+  .meta b { color: var(--text); font-weight: 700; margin-right: 6px; }
+  .cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 30px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 700; font-size: 15px;
+    padding: 11px 20px; border-radius: 10px; border: 1px solid var(--line); color: var(--text); background: var(--surface);
+  }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn:hover { filter: brightness(1.05); }
+
+  /* ---------- Sections ---------- */
+  section { padding: 64px 0; }
+  section + section { border-top: 1px solid var(--line); }
+  .sec-head { margin-bottom: 28px; }
+  .sec-head .num { font-size: 13px; color: var(--accent); font-weight: 700; }
+  .sec-head h2 { font-size: clamp(24px, 3.4vw, 32px); margin: 4px 0 6px; font-weight: 900; }
+  .sec-head p { color: var(--muted); margin: 0; max-width: 680px; }
+
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 860px) { .grid-3 { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px; box-shadow: var(--shadow);
+  }
+  .card h3 { margin: 0 0 6px; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  .card .icon {
+    width: 38px; height: 38px; border-radius: 10px; background: var(--accent-soft); color: var(--accent);
+    display: grid; place-items: center; font-weight: 900; margin-bottom: 14px;
+  }
+
+  /* ---------- Video player ---------- */
+  .player {
+    display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 18px; align-items: start;
+  }
+  @media (max-width: 900px) { .player { grid-template-columns: 1fr; } }
+  .stage {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; box-shadow: var(--shadow);
+  }
+  .screen { position: relative; aspect-ratio: 16 / 9; background: #000; }
+  .screen iframe, .screen .poster { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .poster {
+    cursor: pointer; background-size: cover; background-position: center; display: grid; place-items: center;
+    appearance: none; padding: 0;
+  }
+  .poster::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.45)); }
+  .play {
+    position: relative; width: 76px; height: 76px; border-radius: 50%; background: var(--accent);
+    display: grid; place-items: center; box-shadow: 0 8px 30px rgba(0,0,0,.35); transition: transform .15s;
+  }
+  .poster:hover .play { transform: scale(1.06); }
+  .play svg { width: 30px; height: 30px; margin-left: 5px; fill: #fff; }
+  .soon {
+    position: absolute; inset: 0; display: grid; place-items: center; text-align: center; color: #cfcfd4;
+    background: repeating-linear-gradient(135deg, #1c1c21 0 14px, #202026 14px 28px);
+  }
+  .soon strong { display: block; font-size: 22px; color: #fff; margin-bottom: 4px; }
+  .stage-info { padding: 20px 22px 22px; }
+  .stage-info .ep { font-size: 13px; font-weight: 700; color: var(--accent); }
+  .stage-info h3 { margin: 2px 0 8px; font-size: 22px; }
+  .stage-info p { margin: 0; color: var(--muted); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .tag { font-size: 12px; padding: 3px 9px; border-radius: 999px; background: var(--surface-2); color: var(--muted); }
+
+  .playlist { display: flex; flex-direction: column; gap: 10px; list-style: none; margin: 0; padding: 0; }
+  .playlist button {
+    width: 100%; text-align: left; display: grid; grid-template-columns: 112px 1fr; gap: 12px; align-items: center;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 8px; cursor: pointer;
+    color: var(--text); font: inherit; transition: border-color .15s, background .15s;
+  }
+  .playlist button:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); }
+  .playlist button[aria-current="true"] { border-color: var(--accent); background: var(--accent-soft); }
+  .thumb {
+    aspect-ratio: 16/9; border-radius: 8px; background: #222 center/cover; position: relative; overflow: hidden;
+  }
+  .thumb .badge {
+    position: absolute; left: 6px; bottom: 6px; font-size: 11px; font-weight: 700; color: #fff;
+    background: rgba(0,0,0,.65); padding: 1px 6px; border-radius: 5px;
+  }
+  .thumb.empty { background: repeating-linear-gradient(135deg, #2a2a30 0 8px, #303037 8px 16px); }
+  .pl-text small { display: block; font-size: 12px; color: var(--accent); font-weight: 700; }
+  .pl-text span { display: block; font-size: 15px; font-weight: 700; line-height: 1.4; }
+  .pl-text em { display: block; font-size: 12px; color: var(--muted); font-style: normal; margin-top: 2px; }
+
+  /* ---------- Schedule ---------- */
+  .timeline { display: grid; gap: 0; border-left: 2px solid var(--line); margin-left: 8px; }
+  .tl-item { position: relative; padding: 0 0 22px 24px; }
+  .tl-item::before {
+    content: ""; position: absolute; left: -7px; top: 8px; width: 12px; height: 12px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--accent);
+  }
+  .tl-item .wk { font-size: 13px; font-weight: 700; color: var(--accent); }
+  .tl-item h4 { margin: 0; font-size: 17px; }
+  .tl-item p { margin: 2px 0 0; color: var(--muted); font-size: 15px; }
+
+  .two-col { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; }
+  @media (max-width: 860px) { .two-col { grid-template-columns: 1fr; } }
+  table.info { width: 100%; border-collapse: collapse; font-size: 15px; }
+  table.info th, table.info td { text-align: left; padding: 12px 4px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.info th { width: 96px; color: var(--muted); font-weight: 500; }
+  .bar { display: flex; align-items: center; gap: 10px; margin: 10px 0; font-size: 15px; }
+  .bar .label { width: 96px; flex: none; }
+  .bar .track { flex: 1; height: 10px; background: var(--surface-2); border-radius: 99px; overflow: hidden; }
+  .bar .fill { display: block; height: 100%; background: var(--accent); border-radius: 99px; }
+  .bar .pct { width: 42px; text-align: right; font-weight: 700; }
+
+  footer { padding: 36px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Agent<span>AI</span> · NCKU EE</a>
+    <nav>
+      <a href="#about" class="hide-sm">課程簡介</a>
+      <a href="#videos">教學影片</a>
+      <a href="#schedule" class="hide-sm">課程進度</a>
+      <a href="#info" class="hide-sm">課程資訊</a>
+      <button class="theme-btn" id="themeBtn" aria-label="切換深淺色">◐</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ================= Hero ================= -->
+  <div class="hero">
+    <div class="wrap">
+      <span class="eyebrow">115 學年度 第二學期 · 研究所選修</span>
+      <h1>Agent AI：<br>從大型語言模型到<em>自主代理人</em></h1>
+      <p class="lead">
+        本課程帶領同學從 LLM 的基本原理出發，一步步理解 AI Agent 如何「思考、規劃、使用工具、與環境互動」，
+        並透過實作打造能自主完成任務的智慧代理系統。
+      </p>
+      <div class="meta">
+        <div><b>授課教師</b>○○○ 教授</div>
+        <div><b>學分</b>3</div>
+        <div><b>上課時間</b>星期○ 第 ○–○ 節</div>
+        <div><b>地點</b>電機系館 ○○○ 教室</div>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="#videos">▶ 觀看教學影片</a>
+        <a class="btn" href="#schedule">查看課程進度</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= About ================= -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="num mono">01</div>
+        <h2>課程簡介</h2>
+        <p>生成式 AI 正從「回答問題」走向「完成任務」。Agent AI 結合大型語言模型的推理能力與外部工具、記憶與規劃機制，
+          是目前學界與產業最受關注的方向之一。修完本課程後，你將能夠：</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon">1</div>
+          <h3>理解核心原理</h3>
+          <p>掌握 LLM、提示工程、ReAct、Chain-of-Thought 等 Agent 背後的關鍵概念。</p>
+        </div>
+        <div class="card">
+          <div class="icon">2</div>
+          <h3>動手打造 Agent</h3>
+          <p>學會讓模型呼叫工具（Tool Use / Function Calling）、串接 API 與管理記憶。</p>
+        </div>
+        <div class="card">
+          <div class="icon">3</div>
+          <h3>設計多代理系統</h3>
+          <p>探討 Multi-Agent 協作、評估方法與安全性，並完成期末專題。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Videos ================= -->
+  <section id="videos">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="num mono">02</div>
+        <h2>教學影片</h2>
+        <p>共四支影片，建議依序觀看。點選影片清單即可切換。</p>
+      </div>
+
+      <div class="player">
+        <div class="stage">
+          <div class="screen" id="screen"></div>
+          <div class="stage-info">
+            <div class="ep mono" id="curEp"></div>
+            <h3 id="curTitle"></h3>
+            <p id="curDesc"></p>
+            <div class="tags" id="curTags"></div>
+          </div>
+        </div>
+        <ol class="playlist" id="playlist"></ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Schedule ================= -->
+  <section id="schedule">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="num mono">03</div>
+        <h2>課程進度</h2>
+        <p>以下為暫定規劃，實際進度以課堂公告為準。</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-item"><div class="wk mono">W1–W3</div><h4>LLM 基礎與提示工程</h4><p>Transformer 概念、Prompting 技巧、Chain-of-Thought。</p></div>
+        <div class="tl-item"><div class="wk mono">W4–W6</div><h4>Agent 架構</h4><p>ReAct、規劃（Planning）、反思（Reflection）與記憶機制。</p></div>
+        <div class="tl-item"><div class="wk mono">W7–W9</div><h4>工具使用與實作</h4><p>Function Calling、RAG、串接外部 API，實作第一個 Agent。</p></div>
+        <div class="tl-item"><div class="wk mono">W10–W13</div><h4>多代理系統與評估</h4><p>Multi-Agent 協作、Benchmark、安全性與對齊議題。</p></div>
+        <div class="tl-item"><div class="wk mono">W14–W18</div><h4>期末專題</h4><p>分組設計並展示自己的 Agent 應用。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Info ================= -->
+  <section id="info">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="num mono">04</div>
+        <h2>課程資訊</h2>
+      </div>
+      <div class="two-col">
+        <table class="info">
+          <tr><th>授課教師</th><td>○○○ 教授<br><a href="mailto:professor@example.edu.tw">professor@example.edu.tw</a></td></tr>
+          <tr><th>助教</th><td>王煜凱、○○○<br><a href="mailto:ta@example.edu.tw">ta@example.edu.tw</a></td></tr>
+          <tr><th>先修建議</th><td>Python 程式設計、機器學習或深度學習基礎</td></tr>
+          <tr><th>教材</th><td>課堂講義、教學影片與相關論文（於課程中公布）</td></tr>
+          <tr><th>課程平台</th><td>成大 Moodle</td></tr>
+        </table>
+        <div class="card">
+          <h3 style="margin-bottom:12px">評分方式</h3>
+          <div class="bar"><span class="label">作業</span><span class="track"><span class="fill" style="width:40%"></span></span><span class="pct mono">40%</span></div>
+          <div class="bar"><span class="label">期中報告</span><span class="track"><span class="fill" style="width:20%"></span></span><span class="pct mono">20%</span></div>
+          <div class="bar"><span class="label">期末專題</span><span class="track"><span class="fill" style="width:30%"></span></span><span class="pct mono">30%</span></div>
+          <div class="bar"><span class="label">課堂參與</span><span class="track"><span class="fill" style="width:10%"></span></span><span class="pct mono">10%</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© 2027 國立成功大學 電機工程學系 · Agent AI 課程</div>
+    <div>網頁維護：課程助教群</div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   影片設定：只要改這裡！
+   youtubeId = YouTube 網址中 v= 後面那串，例如
+   https://www.youtube.com/watch?v=dQw4w9WgXcQ  →  "dQw4w9WgXcQ"
+   https://youtu.be/dQw4w9WgXcQ                 →  "dQw4w9WgXcQ"
+   還沒上傳的影片留空字串 ""，會顯示「即將推出」。
+   ========================================================= */
+const VIDEOS = [
+  {
+    youtubeId: "",
+    title: "什麼是 AI Agent？",
+    duration: "",
+    desc: "從聊天機器人到自主代理人：認識 Agent 的定義、組成元件與應用場景。",
+    tags: ["概論", "LLM", "Agent 定義"]
+  },
+  {
+    youtubeId: "",
+    title: "Agent 如何思考與規劃",
+    duration: "",
+    desc: "介紹 Chain-of-Thought、ReAct 與 Reflection，看 Agent 如何拆解任務、逐步推理。",
+    tags: ["ReAct", "Planning", "Reasoning"]
+  },
+  {
+    youtubeId: "",
+    title: "讓 Agent 使用工具",
+    duration: "",
+    desc: "Function Calling、RAG 與外部 API 串接，讓模型不只會說，也會做。",
+    tags: ["Tool Use", "RAG", "API"]
+  },
+  {
+    youtubeId: "",
+    title: "多代理協作與未來展望",
+    duration: "",
+    desc: "多個 Agent 如何分工合作？以及評估、安全性與未來發展方向。",
+    tags: ["Multi-Agent", "Evaluation", "Safety"]
+  }
+];
+
+/* ---------- 以下不用改 ---------- */
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const thumbUrl = (id) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+const PLAY_SVG = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+let current = 0;
+
+function renderPlaylist() {
+  $("playlist").innerHTML = VIDEOS.map((v, i) => `
+    <li>
+      <button data-i="${i}" aria-current="${i === current}">
+        <span class="thumb ${v.youtubeId ? "" : "empty"}" ${v.youtubeId ? `style="background-image:url('${thumbUrl(v.youtubeId)}')"` : ""}>
+          ${v.duration ? `<span class="badge mono">${esc(v.duration)}</span>` : ""}
+        </span>
+        <span class="pl-text">
+          <small class="mono">EP ${String(i + 1).padStart(2, "0")}</small>
+          <span>${esc(v.title)}</span>
+          <em>${v.youtubeId ? "可觀看" : "即將推出"}</em>
+        </span>
+      </button>
+    </li>`).join("");
+}
+
+function select(i, autoplay = false) {
+  current = i;
+  const v = VIDEOS[i];
+  $("curEp").textContent = `EP ${String(i + 1).padStart(2, "0")} / ${String(VIDEOS.length).padStart(2, "0")}`;
+  $("curTitle").textContent = v.title;
+  $("curDesc").textContent = v.desc;
+  $("curTags").innerHTML = (v.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join("");
+
+  const screen = $("screen");
+  if (!v.youtubeId) {
+    screen.innerHTML = `<div class="soon"><div><strong>即將推出</strong>影片製作中，敬請期待</div></div>`;
+  } else if (autoplay) {
+    screen.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(v.youtubeId)}?autoplay=1&rel=0"
+      title="${esc(v.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+  } else {
+    // 先顯示縮圖，點擊才載入 YouTube，網頁開啟速度較快
+    screen.innerHTML = `<button class="poster" aria-label="播放 ${esc(v.title)}" style="background-image:url('${thumbUrl(v.youtubeId)}')"><span class="play">${PLAY_SVG}</span></button>`;
+    screen.querySelector(".poster").onclick = () => select(i, true);
+  }
+  renderPlaylist();
+}
+
+$("playlist").addEventListener("click", (e) => {
+  const b = e.target.closest("button[data-i]");
+  if (!b) return;
+  select(+b.dataset.i, !!VIDEOS[+b.dataset.i].youtubeId);
+  if (window.innerWidth < 900) $("screen").scrollIntoView({ behavior: "smooth", block: "center" });
+});
+
+// 支援網址直接指定集數，例如 index.html#ep2
+const m = location.hash.match(/^#ep(\d)$/);
+select(m ? Math.min(Math.max(+m[1] - 1, 0), VIDEOS.length - 1) : 0);
+
+// 深淺色切換
+$("themeBtn").onclick = () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+};
+</script>
+</body>
+</html>
