@@ -161,16 +161,15 @@
   .pl-text span { display: block; font-size: 15px; font-weight: 700; line-height: 1.4; }
   .pl-text em { display: block; font-size: 12px; color: var(--muted); font-style: normal; margin-top: 2px; }
 
-  /* ---------- Extra video ---------- */
-  .extra-wrap { margin-top: 40px; scroll-margin-top: 80px; }
-  .extra-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
-  .extra-head h3 { margin: 0; font-size: 20px; font-weight: 900; }
-  .extra-head p { margin: 0; font-size: 14px; color: var(--muted); }
-  .extra { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; }
-  @media (max-width: 760px) { .extra { grid-template-columns: 1fr; } }
-  .extra .stage-info h3 { font-size: 20px; }
-  .extra .stage-info > p { font-size: 15px; }
-  .extra .stage-info .btn { margin-top: 16px; font-size: 14px; padding: 8px 14px; }
+  /* ---------- Apply account ---------- */
+  .apply {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px 24px; flex-wrap: wrap;
+    background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent);
+    border-radius: var(--radius); padding: 18px 22px; box-shadow: var(--shadow);
+  }
+  .apply p { margin: 0; font-size: 16px; color: var(--text); }
+  .apply-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+  .apply-btns .btn { font-size: 14px; padding: 9px 16px; }
 
   /* ---------- Schedule ---------- */
   .sched { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
@@ -203,11 +202,12 @@
     <a class="brand" href="#top">Agentic <span>AI</span> · NCKU EE</a>
     <nav>
       <a href="#about" class="hide-sm">課程簡介</a>
+      <a href="#team" class="hide-sm">申請帳號</a>
       <a href="#videos">教學影片</a>
       <a href="#concepts" class="hide-sm">核心概念</a>
       <a href="#schedule" class="hide-sm">課程進度</a>
       <a href="#info" class="hide-sm">課程資訊</a>
-      <a href="#resources" class="hide-sm">延伸資源</a>
+      <a href="#resources" class="hide-sm" hidden>延伸資源</a>
       <button class="theme-btn" id="themeBtn" aria-label="切換深淺色">◐</button>
     </nav>
   </div>
@@ -231,6 +231,7 @@
       <div class="cta">
         <a class="btn primary" href="#videos">▶ 觀看教學影片</a>
         <a class="btn" href="https://claude.ai/download" target="_blank" rel="noopener">下載 Claude</a>
+        <a class="btn" href="#team">申請帳號 ↓</a>
       </div>
     </div>
   </div>
@@ -272,14 +273,32 @@
     </div>
   </section>
 
+  <!-- ================= 申請帳號 ================= -->
+  <section id="team">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="num mono">02</div>
+        <h2>申請帳號</h2>
+      </div>
+      <div class="apply">
+        <p>請依身分選擇方案申請 Claude 帳號，申請步驟請看 <a href="claude_scientists_plan.pdf" target="_blank" rel="noopener">投影片</a>或 <a href="#ep0">EP0 影片</a>。</p>
+        <div class="apply-btns">
+          <a class="btn primary" href="https://claude.com/programs/team-plan-for-scientists" target="_blank" rel="noopener">Team plan for Scientist (PI) ↗</a>
+          <a class="btn primary" href="https://claude.com/solutions/education" target="_blank" rel="noopener">For higher education (Students) ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= Videos ================= -->
   <section id="videos">
     <div class="wrap">
       <div class="sec-head">
-        <div class="num mono">02</div>
+        <div class="num mono">03</div>
         <h2>教學影片</h2>
-        <p>共四支影片，建議依序觀看並跟著操作。點選影片清單即可切換；下方另有一支 <a href="#team">Claude Team 方案申請</a> 的補充影片。</p>
+        <p>EP1–EP4 共四支影片，建議依序觀看並跟著操作；還沒有帳號的話，請先看 EP0 完成申請。點選影片清單即可切換。</p>
       </div>
+
       <div class="player">
         <div class="stage">
           <div class="screen" id="screen"></div>
@@ -301,22 +320,6 @@
         </div>
         <ol class="playlist" id="playlist"></ol>
       </div>
-
-      <!-- 補充影片：Claude Team 方案申請 -->
-      <div class="extra-wrap" id="team">
-        <div class="extra-head">
-          <h3>補充影片</h3>
-        </div>
-        <div class="stage extra">
-          <div class="screen" id="extraScreen"></div>
-          <div class="stage-info">
-            <div class="ep mono">EP0</div>
-            <h3 id="extraTitle"></h3>
-            <p id="extraDesc"></p>
-            <a class="btn" id="extraLink" href="#" target="_blank" rel="noopener">在 YouTube 開啟 ↗</a>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -324,7 +327,7 @@
   <section id="concepts">
     <div class="wrap">
       <div class="sec-head">
-        <div class="num mono">03</div>
+        <div class="num mono">04</div>
         <h2>打造 Agent 的三個設定</h2>
         <p>一般聊天每次都要重新交代背景；建立專案並做好這三項設定後，Claude 就會記得你是誰、要做什麼、該怎麼做。（對應第 2 支影片）</p>
       </div>
@@ -355,7 +358,7 @@
   <section id="schedule">
     <div class="wrap">
       <div class="sec-head">
-        <div class="num mono">04</div>
+        <div class="num mono">05</div>
         <h2>課程進度（草案）</h2>
         <p>下學期課程規劃約 12 週，其餘週次保留給期中、期末與連假。實際進度以課堂公告為準。</p>
       </div>
@@ -393,7 +396,7 @@
   <section id="info">
     <div class="wrap">
       <div class="sec-head">
-        <div class="num mono">05</div>
+        <div class="num mono">06</div>
         <h2>課程資訊</h2>
       </div>
       <table class="info">
@@ -401,17 +404,17 @@
         <tr><th>授課教師</th><td>黃仁暐 教授</td></tr>
         <tr><th>助教</th><td>王煜凱、張維真</td></tr>
         <tr><th>適用對象</th><td>電機系教師（教師工作坊）<br>下學期修課學生（研究所或大學部）<span class="tbd">待確認</span></td></tr>
-        <tr><th>課前準備</th><td>一台電腦、Claude 帳號（第 1 支影片會帶大家完成設定；申請 Team 方案請看 <a href="#team">補充影片</a>）</td></tr>
+        <tr><th>課前準備</th><td>一台電腦、Claude 帳號（第 1 支影片會帶大家完成設定；帳號申請請見 <a href="#team">申請帳號</a> 與 <a href="#ep0">EP0 影片</a>）</td></tr>
         <tr><th>先備知識</th><td>不需要程式背景，會使用電腦與瀏覽器即可</td></tr>
         <tr><th>評分方式</th><td>—<span class="tbd">待定</span></td></tr>
       </table>
     </div>
   </section>
-  <!-- ================= Resources ================= -->
-  <section id="resources">
+  <!-- ================= Resources（暫時隱藏：要顯示時把 hidden 拿掉，導覽列的「延伸資源」也一樣） ================= -->
+  <section id="resources" hidden>
     <div class="wrap">
       <div class="sec-head">
-        <div class="num mono">06</div>
+        <div class="num mono">07</div>
         <h2>延伸學習資源</h2>
         <p>想更深入了解 Agentic AI，可以參考「前瞻AI人培－智慧代理及實體AI課程推動計畫」（NAPAI）提供的資源。</p>
       </div>
@@ -456,8 +459,18 @@
    https://www.youtube.com/watch?v=dQw4w9WgXcQ  →  "dQw4w9WgXcQ"
    https://youtu.be/dQw4w9WgXcQ                 →  "dQw4w9WgXcQ"
    ready: true 代表影片已做好（還沒填 youtubeId 時會顯示「即將上架」）
+   陣列第 0 個是 EP0、第 1 個是 EP1……，頁內連結 #ep0 ~ #ep4 會切到對應集數
    ========================================================= */
 const VIDEOS = [
+  {
+    youtubeId: "HSmCYDcOQLc",
+    ready: true,
+    title: "如何申請 Claude Team plan for Scientists 方案",
+    duration: "",
+    desc: "介紹 Claude Team plan for Scientists 方案與核心功能，並示範如何快速完成申請與開通。",
+    points: ["方案介紹與費用說明", "核心功能：共用專案、管理後台、集中帳單", "四步驟完成申請與開通"],
+    outcome: "完成帳號申請與開通"
+  },
   {
     youtubeId: "AUuhy8wbUsk",
     ready: true,
@@ -496,15 +509,10 @@ const VIDEOS = [
   }
 ];
 
-/* 補充影片（顯示在影片清單下方，不算在四集裡） */
-const EXTRA = {
-  youtubeId: "HSmCYDcOQLc",
-  title: "如何申請 Claude Team 方案",
-};
-
 /* ---------- 以下不用改 ---------- */
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad = (n) => String(n).padStart(2, "0");
 const thumbUrl = (id) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 const PLAY_SVG = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
 const statusText = (v) => v.youtubeId ? "可觀看" : (v.ready ? "即將上架" : "製作中");
@@ -518,7 +526,7 @@ function renderPlaylist() {
           ${v.duration ? `<span class="badge mono">${esc(v.duration)}</span>` : ""}
         </span>
         <span class="pl-text">
-          <small class="mono">EP ${String(i + 1).padStart(2, "0")}</small>
+          <small class="mono">EP ${pad(i)}</small>
           <span>${esc(v.title)}</span>
           <em>${statusText(v)}</em>
         </span>
@@ -529,7 +537,7 @@ function renderPlaylist() {
 function select(i, autoplay = false) {
   current = i;
   const v = VIDEOS[i];
-  $("curEp").textContent = `EP ${String(i + 1).padStart(2, "0")} / ${String(VIDEOS.length).padStart(2, "0")}`;
+  $("curEp").textContent = `EP ${pad(i)} / ${pad(VIDEOS.length - 1)}`;
   $("curTitle").textContent = v.title;
   $("curDesc").textContent = v.desc;
   $("curPoints").innerHTML = (v.points || []).map(p => `<li>${esc(p)}</li>`).join("");
@@ -542,7 +550,6 @@ function select(i, autoplay = false) {
       : `<div class="soon"><div><strong>製作中</strong>敬請期待</div></div>`;
   } else if (autoplay) {
     screen.innerHTML = iframeHtml(v);
-    stopExtra();
   } else {
     screen.innerHTML = posterHtml(v);
     screen.querySelector(".poster").onclick = () => select(i, true);
@@ -559,30 +566,6 @@ function posterHtml(v) {
   return `<button class="poster" aria-label="播放 ${esc(v.title)}" style="background-image:url('${thumbUrl(v.youtubeId)}')"><span class="play">${PLAY_SVG}</span></button>`;
 }
 
-// ---------- 補充影片 ----------
-function mountExtra(play = false) {
-  const s = $("extraScreen");
-  $("extraTitle").textContent = EXTRA.title;
-  $("extraDesc").textContent = EXTRA.desc;
-  $("extraLink").href = `https://youtu.be/${encodeURIComponent(EXTRA.youtubeId)}`;
-  if (!EXTRA.youtubeId) {
-    s.innerHTML = `<div class="soon"><div><strong>製作中</strong>敬請期待</div></div>`;
-    $("extraLink").hidden = true;
-    return;
-  }
-  if (play) {
-    s.innerHTML = iframeHtml(EXTRA);
-    // 同時只播一支：主影片若在播放就切回封面
-    if ($("screen").querySelector("iframe")) select(current);
-  } else {
-    s.innerHTML = posterHtml(EXTRA);
-    s.querySelector(".poster").onclick = () => mountExtra(true);
-  }
-}
-function stopExtra() {
-  if ($("extraScreen").querySelector("iframe")) mountExtra(false);
-}
-
 $("playlist").addEventListener("click", (e) => {
   const b = e.target.closest("button[data-i]");
   if (!b) return;
@@ -590,16 +573,20 @@ $("playlist").addEventListener("click", (e) => {
   if (window.innerWidth < 900) $("screen").scrollIntoView({ behavior: "smooth", block: "center" });
 });
 
-// 網址或頁內連結 #ep1 ~ #ep4 會直接切到該集並捲到影片區
+// 網址或頁內連結 #ep0 ~ #ep4 會直接切到該集並捲到影片區
 function fromHash() {
   const m = location.hash.match(/^#ep(\d)$/);
   if (!m) return false;
-  select(Math.min(Math.max(+m[1] - 1, 0), VIDEOS.length - 1));
+  select(Math.min(+m[1], VIDEOS.length - 1));
   $("videos").scrollIntoView({ behavior: "smooth" });
   return true;
 }
 window.addEventListener("hashchange", fromHash);
-mountExtra();
+// 網址已經是同一個 #epN 時，再點一次連結也要能切換
+document.addEventListener("click", (e) => {
+  const a = e.target.closest('a[href^="#ep"]');
+  if (a && a.getAttribute("href") === location.hash) { e.preventDefault(); fromHash(); }
+});
 if (!fromHash()) select(0);
 
 $("themeBtn").onclick = () => {
